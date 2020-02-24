@@ -10,6 +10,21 @@ app.get('/', (req, res) => {
 	res.sendFile(respath);
 })
 
+app.get('/templates', (req, res) => {
+	let respath = __dirname + '/public/html_template.html';
+	res.sendFile(respath);
+})
+
+app.get('/imports', (req, res) => {
+	let respath = __dirname + '/public/html_import.html';
+	res.sendFile(respath);
+})
+
+app.get('/modules', (req, res) => {
+	let respath = __dirname + '/public/html_module.html';
+	res.sendFile(respath);
+})
+
 app.get('/simplecvc', (req, res) => {
 	let respath = __dirname + '/public/basiccvc.html';
 	res.sendFile(respath);
