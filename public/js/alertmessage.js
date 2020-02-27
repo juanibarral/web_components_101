@@ -10,13 +10,6 @@ class AlertMessage extends HTMLElement {
   static get observedAttributes() {
       return ["visible"];
   }
-
-  static get template() {
-    if(!this._template) {
-      this._template = document.querySelector("#alert-message-template");
-    }
-    return this._template;
-  }
   // ***************************************
   // Custom element lifecycle functions
   // ***************************************

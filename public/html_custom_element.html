@@ -3,22 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>HTML template tag</title>
-    <link rel="stylesheet" href="css/alertmessage.css">
-
+    
     <template id="alert-message-template">
       <div class="alert">
-          <div class="error"><slot></slot></div>
+          <div class="error"><slot name="title"></slot></div>
       </div>
     </template>
-
-
 
     <script type="text/javascript" src="js/alertmessage.js"></script>
   </head>
   <body>
     <h1>Custom Element example</h1>
     <alert-message id="message" visible>
-      <p>This is the message</p>
+      <p slot="title">This is the message</p>
     </alert-message>
     <button type="button" id="btn_1">Activate alert message</button>
     <script>

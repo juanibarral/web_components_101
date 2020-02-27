@@ -1,8 +1,8 @@
-alert-message {
+:host {
   display : none;
 }
 
-alert-message[visible] {
+:host([visible]) {
   display : block;
   cursor : pointer;
 }

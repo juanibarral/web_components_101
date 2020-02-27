@@ -1,0 +1,119 @@
+<template id="alert-message-template">
+  <style>
+    :host {
+      display : none;
+    }
+
+    :host([visible]) {
+      display : block;
+      cursor : pointer;
+    }
+
+    .alert {
+      font-family: Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    }
+
+    .alert div{
+      padding: .75rem 1.25rem;
+      border-left: 3em solid;
+    }
+
+    :host([type="primary"]) .alert .message {
+      color: #004085;
+      background-color: #cce5ff;
+    }
+
+    :host([type="secondary"]) .alert .message {
+      color: #383d41;
+      background-color: #e2e3e5;
+    }
+
+    :host([type="success"]) .alert .message {
+      color: #155724;
+      background-color: #d4edda;
+    }
+
+    :host([type="danger"]) .alert .message {
+      color: #990f3d;
+      background-color: #faf3f5;
+    }
+
+    :host([type="warning"]) .alert .message {
+      color: #856404;
+      background-color: #fff3cd;
+    }
+  </style>
+  <div class="alert">
+      <div class="message"><slot name="title"></slot></div>
+  </div>
+</template>
+<script>
+(function(){
+  var thisImportDoc = document.currentScript.ownerDocument;
+  class AlertMessage extends HTMLElement {
+    constructor() {
+      // Always call super first in constructor
+      super();
+    }
+
+    // Which attributes will trigger attributeChangedCallback
+    static get observedAttributes() {
+        return ["visible", "type"];
+    }
+
+    static get template() {
+      if(!this._template) {
+        this._template = thisImportDoc.querySelector("#alert-message-template");
+      }
+
+      return this._template;
+    }
+    // ***************************************
+    // Custom element lifecycle functions
+    // ***************************************
+    connectedCallback() {
+      let shadowRoot = this.attachShadow({mode: "open"});
+      let template = AlertMessage.template;
+      shadowRoot.appendChild(
+          document.importNode(template.content,true)
+      );
+
+      this.addEventListener("click", e => {
+        this.visible = false;
+      });
+    }
+
+    disconnectedCallback() {
+      console.log("alert-message disconnected from page");
+    }
+
+    adoptedCallback() {
+      console.log("alert-message adopted in page");
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+      console.log("alert-message attr: " + name + " changed from '"
+      + oldValue + "' to '" + newValue + "'");
+    }
+    // Getter for the visible property
+    get visible() {
+      return this.hasAttribute('visible');
+    }
+
+    // Setter for the visible property
+    set visible(val) {
+      if (val) {
+        this.setAttribute('visible', '');
+      }
+      else {
+        this.removeAttribute('visible');
+      }
+    }
+  }
+
+  // Define the new element
+  customElements.define('alert-message', AlertMessage);
+}
+
+)();
+</script>

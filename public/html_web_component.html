@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>HTML template tag</title>
+
+    <script src="js/webcomponents-lite.js"></script>
+    <!-- Import file through link tag -->
+    <link rel="import" href="alertmessagewc.html" id="wc_template">
+  </head>
+  <body>
+    <h1>Custom Element example</h1>
+    <alert-message id="message" visible type="primary">
+      <p slot="title">This is the message</p>
+    </alert-message>
+    <button type="button" id="btn_1">Activate alert message</button>
+    <button type="button" id="btn_2">Change type of message</button>
+    <script>
+      var counter = 0;
+      window.addEventListener("DOMContentLoaded", e => {
+        document.getElementById("btn_1").addEventListener("click", e => {
+          var alert = document.getElementById("message");
+          alert.visible = !alert.visible;
+        })
+      })
+      var types = ["primary", "secondary", "success", "danger", "warning"];
+      var type_i = 0;
+      window.addEventListener("DOMContentLoaded", e => {
+        document.getElementById("btn_2").addEventListener("click", e => {
+          var alert = document.getElementById("message");
+          type_i++;
+          if(type_i >= types.length)
+          {
+            type_i = 0;
+          }
+          alert.setAttribute("type", types[type_i]);
+        })
+      })
+    </script>
+  </body>
+</html>

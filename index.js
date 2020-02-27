@@ -35,6 +35,11 @@ app.get('/custom_elements', (req, res) => {
 	res.sendFile(respath);
 })
 
+app.get('/web_component', (req, res) => {
+	let respath = __dirname + '/public/html_web_component.html';
+	res.sendFile(respath);
+})
+
 app.get('/simplecvc', (req, res) => {
 	let respath = __dirname + '/public/basiccvc.html';
 	res.sendFile(respath);
